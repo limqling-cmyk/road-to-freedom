@@ -16,7 +16,8 @@ self.addEventListener('fetch', (e) => {
   if (req.mode === 'navigate') {
     // pages: try the network for the newest version, fall back to the saved copy offline
     e.respondWith(
-      fetch(req).then((res) => { caches.open(CACHE).then((c) => c.put('./index.html', res.clone())); return res; })
+      // always ask GitHub for the newest page (skip the phone's 10-minute web cache)
+      fetch(req, { cache: 'no-store' }).then((res) => { const copy = res.clone(); caches.open(CACHE).then((c) => c.put('./index.html', copy)); return res; })
         .catch(() => caches.match('./index.html')),
     );
     return;

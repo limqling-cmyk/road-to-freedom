@@ -19,7 +19,7 @@ const head = `
 html = html.replace('</head>', `${head}\n  </head>`);
 // let the app use the full screen on phones with a notch / home bar
 html = html.replace(/<meta name="viewport" content="[^"]*"\s*\/?>/, '<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />');
-html = html.replace('</body>', `  <script>if('serviceWorker' in navigator){addEventListener('load',function(){navigator.serviceWorker.register('${base}/sw.js',{scope:'${base}/'})})}</script>\n  </body>`);
+html = html.replace('</body>', `  <script>if('serviceWorker' in navigator){addEventListener('load',function(){navigator.serviceWorker.register('${base}/sw.js',{scope:'${base}/',updateViaCache:'none'}).then(function(r){r.update()})})}</script>\n  </body>`);
 fs.writeFileSync(file, html);
 
 // new cache name for every build, so phones pick up updates
