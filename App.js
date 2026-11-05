@@ -43,7 +43,7 @@ function Tabs() {
           tabBarActiveTintColor: C.brand,
           tabBarInactiveTintColor: '#9AA09D',
           // tall enough that labels sit fully above the iPhone home bar
-          tabBarStyle: { backgroundColor: '#fff', borderTopColor: C.line, height: 58 + insets.bottom, paddingTop: 6 },
+          tabBarStyle: { backgroundColor: '#fff', borderTopColor: C.line, height: 54 + Math.round(insets.bottom * 0.5), paddingTop: 6, paddingBottom: Math.round(insets.bottom * 0.5) },
           tabBarItemStyle: { paddingBottom: 4 },
           tabBarIconStyle: { height: 22 },
           tabBarLabelStyle: { fontSize: 11, fontWeight: '600', lineHeight: 14 },
