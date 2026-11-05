@@ -1,0 +1,16 @@
+{
+  "name": "Road to freedom",
+  "short_name": "Road to freedom",
+  "description": "Plan, record and review where your money goes. Data stays on your phone.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F2EC",
+  "theme_color": "#1F5F4A",
+  "icons": [
+    { "src": "web-icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "web-icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "web-icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

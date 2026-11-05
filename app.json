@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Road to freedom",
+    "slug": "road-to-freedom",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.limqling.roadtofreedom",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#1F5F4A",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "package": "com.limqling.roadtofreedom"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "name": "Road to freedom",
+      "shortName": "Road to freedom",
+      "themeColor": "#1F5F4A",
+      "backgroundColor": "#F4F2EC"
+    },
+    "plugins": [
+      "expo-sqlite",
+      "expo-sharing",
+      "expo-document-picker"
+    ],
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1F5F4A"
+    }
+  }
+}
