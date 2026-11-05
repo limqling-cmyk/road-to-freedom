@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StoreProvider, useStore } from './src/store';
@@ -19,6 +19,7 @@ const ICONS = { Overview: '◉', Plan: '%', Records: '≡', History: '▤', Asse
 
 function Tabs() {
   const { state } = useStore();
+  const insets = useSafeAreaInsets();
   if (!state) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: C.bg }}>
@@ -41,8 +42,11 @@ function Tabs() {
           headerShown: false,
           tabBarActiveTintColor: C.brand,
           tabBarInactiveTintColor: '#9AA09D',
-          tabBarStyle: { backgroundColor: '#fff', borderTopColor: C.line },
-          tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+          // tall enough that labels sit fully above the iPhone home bar
+          tabBarStyle: { backgroundColor: '#fff', borderTopColor: C.line, height: 58 + insets.bottom, paddingTop: 6 },
+          tabBarItemStyle: { paddingBottom: 4 },
+          tabBarIconStyle: { height: 22 },
+          tabBarLabelStyle: { fontSize: 11, fontWeight: '600', lineHeight: 14 },
           tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 16, lineHeight: 20, fontWeight: '800' }}>{ICONS[route.name]}</Text>,
         })}
       >

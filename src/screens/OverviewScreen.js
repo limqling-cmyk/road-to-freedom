@@ -68,7 +68,7 @@ export default function OverviewScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: C.bg }}>
-      <View {...yearSwipe} style={{ backgroundColor: C.brand, paddingTop: insets.top + 6, paddingHorizontal: 16, paddingBottom: 10 }}>
+      <View {...yearSwipe} style={{ backgroundColor: C.brand, paddingTop: insets.top + 12, paddingHorizontal: 16, paddingBottom: 10 }}>
         <View style={s.between}>
           <Text style={{ color: '#CFE3DA', fontSize: 12, fontWeight: '700', letterSpacing: 1 }}>ROAD TO FREEDOM · YEAR</Text>
           <Pressable onPress={() => setSettings(true)} hitSlop={10}><Text style={{ color: '#fff', fontSize: 20 }}>⚙</Text></Pressable>

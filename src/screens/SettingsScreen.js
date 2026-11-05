@@ -1,10 +1,10 @@
-import React from 'react';
-import { Alert, Animated, Modal, Platform, Pressable, ScrollView, Switch, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Animated, Modal, Platform, Pressable, ScrollView, Switch, Text, TextInput, View } from 'react-native';
 import { GrabBar, useSwipeDown } from '../gestures';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useStore } from '../store';
 import { Button, C, Card, s } from '../ui';
-import { exportBackup, pickBackup } from '../backup';
+import { exportBackup, parseBackup, pickBackup } from '../backup';
 import IncomeSources from '../IncomeSources';
 
 const tell = (t, m) => (Platform.OS === 'web' ? window.alert(`${t}\n\n${m}`) : Alert.alert(t, m));
@@ -17,6 +17,8 @@ export default function SettingsModal({ visible, onClose }) {
   const { state, setSetting, replaceAll, resetToExcel } = useStore();
   const insets = useSafeAreaInsets();
   const sheet = useSwipeDown(onClose, visible);
+  const [pasting, setPasting] = useState(false);
+  const [pasteText, setPasteText] = useState('');
   if (!visible) return null;
   const editAll = !!state.settings?.editAllAtClose;
 
@@ -33,7 +35,7 @@ export default function SettingsModal({ visible, onClose }) {
   return (
     <Modal visible transparent animationType="none" statusBarTranslucent onRequestClose={() => sheet.dismiss()}>
       <Animated.View style={[{ flex: 1, backgroundColor: C.bg }, sheet.style]}>
-        <View {...sheet.handlers} style={{ backgroundColor: C.brand, paddingTop: insets.top + 2, paddingHorizontal: 20, paddingBottom: 14 }}>
+        <View {...sheet.handlers} style={{ backgroundColor: C.brand, paddingTop: insets.top + 6, paddingHorizontal: 20, paddingBottom: 14 }}>
           <GrabBar light />
           <View style={s.between}>
             <Text style={{ color: '#fff', fontSize: 22, fontWeight: '700' }}>Settings</Text>
@@ -66,7 +68,34 @@ export default function SettingsModal({ visible, onClose }) {
           <Card style={{ marginTop: 6 }}>
             <Text style={[s.muted, { marginBottom: 10 }]}>Everything is saved only on this phone. Make a backup now and then and keep it in Google Drive, iCloud or email.</Text>
             <Button kind="ghost" title="Backup data" onPress={() => exportBackup(state).catch((e) => tell('Backup failed', String(e?.message ?? e)))} />
-            <Button kind="ghost" title="Restore from backup" onPress={restore} style={{ marginTop: 8 }} />
+            <Button kind="ghost" title="Restore from backup file" onPress={restore} style={{ marginTop: 8 }} />
+            <Button kind="ghost" title={pasting ? 'Hide paste box' : 'Restore by pasting backup text'} onPress={() => setPasting(!pasting)} style={{ marginTop: 8 }} />
+            {pasting ? (
+              <View style={{ marginTop: 8 }}>
+                <Text style={[s.muted, { marginBottom: 6 }]}>Copy the whole backup text (it starts with {'{'} and ends with {'}'}), then long-press the box below and choose Paste.</Text>
+                <TextInput
+                  value={pasteText}
+                  onChangeText={setPasteText}
+                  multiline
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  placeholder="Paste backup text here"
+                  style={[s.input, { height: 120, textAlignVertical: 'top', paddingTop: 8, fontSize: 12 }]}
+                />
+                <Button
+                  title="Restore this text"
+                  style={{ marginTop: 8 }}
+                  onPress={() => {
+                    try {
+                      const data = parseBackup(pasteText);
+                      ask('Restore backup?', 'This replaces everything currently in the app with the pasted backup.', () => { replaceAll(data); setPasteText(''); setPasting(false); sheet.dismiss(); }, 'Restore');
+                    } catch (e) {
+                      tell('Could not restore', String(e?.message ?? e));
+                    }
+                  }}
+                />
+              </View>
+            ) : null}
             <Button
               kind="danger"
               title="Reset to empty template"

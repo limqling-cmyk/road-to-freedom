@@ -15,7 +15,7 @@ const head = `
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Road to freedom" />
     <link rel="apple-touch-icon" href="${base}/apple-touch-icon.png" />
-    <style>html,body{background:#F4F2EC;overscroll-behavior:none;-webkit-tap-highlight-color:transparent}</style>`;
+    <style>html{background:linear-gradient(to bottom,#1F5F4A 0,#1F5F4A 50%,#FFFFFF 50%,#FFFFFF 100%);height:100%}body{background:transparent;height:100%;min-height:100dvh;overscroll-behavior:none;-webkit-tap-highlight-color:transparent}#root{min-height:100dvh}</style>`;
 html = html.replace('</head>', `${head}\n  </head>`);
 // let the app use the full screen on phones with a notch / home bar
 html = html.replace(/<meta name="viewport" content="[^"]*"\s*\/?>/, '<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />');

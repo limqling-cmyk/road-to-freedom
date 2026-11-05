@@ -32,7 +32,7 @@ export default function HistoryScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: C.bg }}>
-      <View style={{ backgroundColor: C.brand, paddingTop: insets.top + 8, paddingHorizontal: 20, paddingBottom: 14 }}>
+      <View style={{ backgroundColor: C.brand, paddingTop: insets.top + 12, paddingHorizontal: 20, paddingBottom: 14 }}>
         <Text style={{ color: '#CFE3DA', fontSize: 13, fontWeight: '600', letterSpacing: 1 }}>HISTORY</Text>
         <View style={[s.between, { marginTop: 4 }]}>
           <Text style={{ color: '#fff', fontSize: 22, fontWeight: '700' }}>Where the money went</Text>
@@ -210,7 +210,7 @@ function MonthDetail({ monthKey: k, onBack }) {
 
   return (
     <TabSwipe style={{ backgroundColor: C.bg }} onRight={onBack} onLeft={null} enterFrom="right">
-      <View style={{ backgroundColor: C.brand, paddingTop: insets.top + 8, paddingHorizontal: 20, paddingBottom: 14 }}>
+      <View style={{ backgroundColor: C.brand, paddingTop: insets.top + 12, paddingHorizontal: 20, paddingBottom: 14 }}>
         <Pressable onPress={onBack} hitSlop={10}><Text style={{ color: '#CFE3DA', fontSize: 14, fontWeight: '600' }}>‹ History</Text></Pressable>
         <View style={[s.between, { marginTop: 4 }]}>
           <Text style={{ color: '#fff', fontSize: 22, fontWeight: '700' }}>{monthLabel(k, true)}</Text>

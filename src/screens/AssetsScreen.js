@@ -20,7 +20,7 @@ export default function AssetsScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: C.bg }}>
-      <View style={{ backgroundColor: C.brand, paddingTop: insets.top + 8, paddingHorizontal: 20, paddingBottom: 18 }}>
+      <View style={{ backgroundColor: C.brand, paddingTop: insets.top + 12, paddingHorizontal: 20, paddingBottom: 18 }}>
         <Text style={{ color: '#CFE3DA', fontSize: 13, fontWeight: '600', letterSpacing: 1 }}>ASSETS · NET WORTH</Text>
         <Text style={{ color: '#fff', fontSize: 30, fontWeight: '800', marginTop: 4 }}>{rm(sum.netWorth)}</Text>
         <Text style={{ color: '#CFE3DA', fontSize: 13, marginTop: 2 }}>Cash & bank + investments</Text>

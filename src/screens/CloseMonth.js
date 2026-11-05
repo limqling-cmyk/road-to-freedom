@@ -58,7 +58,7 @@ export default function CloseMonth({ monthKey: key, visible, onClose }) {
     <Modal visible transparent animationType="none" statusBarTranslucent onRequestClose={() => sheet.dismiss()}>
       <Animated.View style={[{ flex: 1, backgroundColor: C.bg }, sheet.style]}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1, backgroundColor: C.bg }}>
-        <View {...sheet.handlers} style={{ backgroundColor: C.brand, paddingTop: insets.top + 2, paddingHorizontal: 20, paddingBottom: 14 }}>
+        <View {...sheet.handlers} style={{ backgroundColor: C.brand, paddingTop: insets.top + 6, paddingHorizontal: 20, paddingBottom: 14 }}>
           <GrabBar light />
           <View style={s.between}>
             <Text style={{ color: '#CFE3DA', fontSize: 13, fontWeight: '600', letterSpacing: 1 }}>CLOSE MONTH · FINAL ALLOCATION</Text>

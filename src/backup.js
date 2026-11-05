@@ -35,9 +35,21 @@ export async function pickBackup() {
     const { File } = require('expo-file-system');
     text = await new File(asset.uri).text();
   }
-  const data = JSON.parse(text);
+  return parseBackup(text);
+}
+
+// Turns backup text (from a file, or pasted) into app data. Throws if it is not a backup.
+export function parseBackup(text) {
+  let data;
+  try {
+    // tolerate stray spaces or chat formatting around the pasted text
+    const raw = String(text || '').trim();
+    data = JSON.parse(raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
+  } catch {
+    throw new Error('This is not a Road to freedom backup. Make sure you copied all of the text, from the first { to the last }.');
+  }
   if (!data || !data.budgets || !Array.isArray(data.transactions) || !Array.isArray(data.assets)) {
-    throw new Error('This file is not a Road to freedom backup.');
+    throw new Error('This is not a Road to freedom backup.');
   }
   data.assetSnapshots = data.assetSnapshots ?? {};
   data.incomeSources = data.incomeSources ?? [];

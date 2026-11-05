@@ -38,7 +38,7 @@ export function MonthBar({ title }) {
   // swipe on the top bar: left = next month, right = previous month
   const swipe = useHorizontalSwipe({ capture: true, onLeft: () => setMonth(shiftMonth(month, 1)), onRight: () => setMonth(shiftMonth(month, -1)) });
   return (
-    <View {...swipe} style={[s.monthBar, { paddingTop: insets.top + 8 }]}>
+    <View {...swipe} style={[s.monthBar, { paddingTop: insets.top + 12 }]}>
       <Text style={s.screenTitle}>{title}</Text>
       <View style={s.monthRow}>
         <Pressable hitSlop={10} onPress={() => setMonth(shiftMonth(month, -1))} style={s.arrow}>
